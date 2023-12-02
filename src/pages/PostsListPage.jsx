@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { DeleteIcon } from '../components/UI/icons'
+import { fetchPosts } from '../store/postsSlice'
 
 const PostsListPage = () => {
   const [posts, setPosts] = useState([])
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts?_limit=15')
-      .then((response) => response.json())
-      .then((json) => setPosts(json))
+    dispatch(fetchPosts())
   }, [])
 
   return (
