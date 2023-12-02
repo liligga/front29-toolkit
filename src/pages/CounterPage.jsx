@@ -10,7 +10,7 @@ const CounterPage = () => {
 
   const handleIncrement = () => {
     // dispatch(counterActions.increment());
-    dispatch(counterActions.increment(Number(val)));
+    dispatch(counterActions.incrementCounter(Number(val)));
   };
 
   return (
