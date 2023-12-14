@@ -1,13 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginThunk, logoutThunk } from '../store/authSlice';
 
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('kminchelle');
+  const [password, setPassword] = useState('0lelplR');
+  const user = useSelector(state => state.auth.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(loginThunk({username, password}));
   }
+
+  useEffect(() => {
+    if (user) {
+      navigate('/')
+    }
+  }, [user])
+
 
   return (
     <div className='grid grid-cols-1 gap-6'>

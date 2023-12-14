@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { todosActions } from '../store/todosSlice';
+import { addTodoThunk, addTodoThunkV2 } from '../store/todosSlice';
 
 
 const TodoForm = () => {
@@ -11,7 +12,8 @@ const TodoForm = () => {
     e.preventDefault();
     if (!newTodo) return;
 
-    dispatch(todosActions.addTodo(newTodo));
+    // dispatch(todosActions.addTodo(newTodo));
+    dispatch(addTodoThunkV2(newTodo));
     setNewTodo('');
   }
 

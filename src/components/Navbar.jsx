@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const activeLinkClass = ({ isActive }) => {
   return isActive
@@ -7,6 +8,8 @@ const activeLinkClass = ({ isActive }) => {
 };
 
 const Navbar = () => {
+  const user = useSelector(state => state.auth.user)
+
   return (
     <nav className="sticky top-0 z-10 flex justify-center align-center h-16 col-span-4 bg-neutral-50 border-b bg-opacity-75 backdrop-blur backdrop-filter border-b-slate-300 [&>*]:flex  [&>*]:items-center [&>*]:list-none [&>*]:gap-2 [&>*]:sm:gap-6 ">
       <ul>
@@ -35,6 +38,17 @@ const Navbar = () => {
             Todos
           </NavLink>
         </li>
+        <li>
+          {user ? (
+            <Link to="/logout" className={activeLinkClass}>
+              Logout
+              </Link>
+          ) : 
+            <NavLink to="/login" className={activeLinkClass}>
+              Login
+            </NavLink>
+          }
+        </li> 
       </ul>
     </nav>
   );

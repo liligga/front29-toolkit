@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { DeleteIcon } from "./UI/icons";
 import { todosActions } from "../store/todosSlice";
+import { fetchTodos, fetchTodosV2 } from "../store/todosSlice";
 
-// const todoItems = [
-//   { id: 1, name: "Item 1" },
-//   { id: 2, name: "Item 2" },
-//   { id: 3, name: "Item 3" },
-// ];
 
 const TodoTable = () => {
   // const [items, setItems] = useState(todoItems);
   const items = useSelector((state) => state.todos.items);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTodosV2());
+  }, [])
 
   const handleDeleteClick = (id) => {
     console.log(id);
@@ -39,7 +39,7 @@ const TodoTable = () => {
                 onClick={() => handleCheckClick(item.id)}
               />
             </div>
-            <div className="flex-grow flex-shrink-0">{item.name}</div>
+            <div className="flex-grow flex-shrink-0">{item.todo}</div>
             <div>
               <button
                 className="text-red-500 px-2 rounded-sm text-base"
